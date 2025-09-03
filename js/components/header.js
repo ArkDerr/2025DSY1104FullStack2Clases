@@ -29,14 +29,27 @@ document.getElementById("header").innerHTML = `
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                        <li class="nav-item" id="nav-login">
                             <a class="nav-link" href="login.html">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="nav-registro">
                             <a class="nav-link" href="">Registarse</a>
+                        </li>
+                        <li class="nav-item d-none" id="nav-logout">
+                            <a class="nav-link" href="" id="btnLogout">Logout</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         `;
+
+const logueado = localStorage.getItem("logueado");
+document.getElementById("nav-login").classList.toggle("d-none", logueado === "true");
+document.getElementById("nav-registro").classList.toggle("d-none", logueado === "true");
+document.getElementById("nav-logout").classList.toggle("d-none", logueado !== "true");
+
+if (logueado === "true") {
+    const user = localStorage.getItem("usuario");
+    document.querySelector("#nav-logout a").textContent = `Logout ${user}`
+}
